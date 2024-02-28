@@ -1,4 +1,4 @@
-package org.api.springf1;
+package org.api.springf1.service;
 
 import org.api.springf1.dto.DriverDTO;
 import org.api.springf1.exception.DriverNotFoundException;
@@ -36,12 +36,12 @@ public class DriverServiceImplTest {
 
     @BeforeEach
     public void setup() {
-        driver = Driver.builder().id(1L).code("AAA").forename("Ayrton").surname("Senna").build();
+        driver = Driver.builder().id(1L).code("AAA").forename("Ayrton").build();
         driverDTO = DriverDTO.builder().id(1L).code("AAA").forename("Ayrton").surname("Senna").build();
     }
 
     @Test
-    void shouldReturnDriverDTOWhenCreateDriver() {
+    void shouldReturnDriverDTOWhenCreateDriver() {  // Test para crear un driver
         //Given
         when(driverRepository.save(any(Driver.class))).thenReturn(driver);
 
@@ -56,7 +56,7 @@ public class DriverServiceImplTest {
         verify(driverRepository, times(1)).save(driver);
     }
     @Test
-    public void shouldReturnDriverDTOWhenFindDriverByCode() {
+    public void shouldReturnDriverDTOWhenFindDriverByCode() { // Test para buscar un driver por su código
         // Given
         String code = "AAA";
         Driver driver = new Driver();
@@ -82,9 +82,9 @@ public class DriverServiceImplTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenDriverNotFoundByCode() {
+    public void shouldThrowExceptionWhenDriverNotFoundByCode() { // Test para verificar que se lanza una excepción cuando no se encuentra un driver por su código
         // Given
-        String code = "ZZZ";
+        String code = "stgaSGASERGAWEGGERG";
         when(driverRepository.findByCodeIgnoreCase(code)).thenReturn(Optional.empty());
 
         // When
